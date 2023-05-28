@@ -1,40 +1,47 @@
-import React from 'react';
-import { Dropdown } from 'react-bootstrap';
+import React, { useState } from 'react';
 import { AddressDropDownProps } from './types/AddressDropDownProps';
+import { EnvelopeAddress } from './types/EnvelopeAddress';
+import styles from './styles/AddressDropDown.module.css';
 
 
 
 export default function AddressDropDown(props: AddressDropDownProps){
 
-  let change = (eventkey:string|null) => {
-    {props.clientAddress(eventkey!)};
+  const dropdown_title = ' -- select your address -- ';
+
+  let change = (event:{}) => {
+    {props.clientAddress(event?.target?.value)};
   };
 
-  const fetchedAddresses = props.addresses?.map((item, index) => {
-    const envelopeAddress = item.envelopeAddress;
+  function formatAddress(envelopeAddress: EnvelopeAddress) {
     let fullAddress = envelopeAddress.addressLine1;
     if(envelopeAddress.addressLine2) {
       fullAddress += ", " + envelopeAddress.addressLine2;
     }
     fullAddress += ", " + envelopeAddress.postCode;
 
-    return (
-      <Dropdown.Item 
-        key={index} 
-        eventKey={JSON.stringify(envelopeAddress)}
-      >
-        {fullAddress}
-      </Dropdown.Item>
-    );
-})
+    return fullAddress;
+  }
+
+  console.log('addresses are: ', props.addresses)
   return (
-    <Dropdown onSelect={change}>
-      <Dropdown.Toggle
-        className='mt-2 mb-2 dropdown'>Choose Your Address</Dropdown.Toggle>
-      <Dropdown.Menu
-       className='dropdown'>
-        {fetchedAddresses}
-      </Dropdown.Menu>
-    </Dropdown>
+    <form>
+    <select name='address' className={styles.addressDropDownItem} onChange={change} defaultValue='default'>
+      <option disabled value='default'> -- select your address -- </option>
+       {props.addresses?.map((item, index) => {
+          const address = formatAddress(item.envelopeAddress);
+
+          return (
+            <option 
+              key={index} 
+              value={address}
+              className={styles.addressDropDownItem}
+            >
+              {address}
+            </option>
+          );
+        })}
+    </select>
+    </form>
   )
 }

@@ -1,0 +1,10 @@
+.button {
+    width: 100%;
+    background-color: white;
+    margin-bottom: 20px;
+    border: 1px solid;
+    border-color: rgb(118, 118, 118);
+    font-size: clamp(6.9px, 2.2vw, 16px);
+    text-align: left;
+    padding: 8px;
+}
