@@ -1,0 +1,11 @@
+.datepicker {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+}
+
+.datepicker:hover {
+    background-color: #222020a8;
+    color: #ffffff;
+    cursor: pointer;
+}

@@ -1,0 +1,13 @@
+.availabletimes{
+    padding: 8px;
+}
+
+.availabletimes:hover {
+    background-color: #222020a8;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.timechosen {
+    background-color: #222020a8;
+}
